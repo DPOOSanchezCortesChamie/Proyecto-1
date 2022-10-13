@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Alineacion {
 	
-	private HashMap<Jugador> jugadores;
+	private HashMap<String,Jugador> jugadores;
 	private Jugador capitan;
 	private int puntos;
 	private Fecha fecha;
@@ -33,9 +33,9 @@ public class Alineacion {
 	
 	public void actualizarPuntos() {
 		int total = 0;
-		for(String nombre: jugadores) {
+		for(String nombre: jugadores.keySet()) {
 			total += jugadores.get(nombre).calcularPuntos(fecha.getNumFecha());
 		}
-		return total;
+		puntos = total;
 	}
 }

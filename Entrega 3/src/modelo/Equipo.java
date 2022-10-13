@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 public class Equipo {
 	private String nombre;
-	private HashMap<Jugador> jugadores;
+	private HashMap<String,Jugador> jugadores;
 	public Equipo(String nombre) {
 		this.nombre = nombre;
 	}
 	public void agregarJugador(String nombre, int precio, String pos) {
-		Jugador nuevoJugador;
+		Jugador nuevoJugador = null;
 		if (pos == "delantero")
 			nuevoJugador = new Delantero(nombre, precio);
 		else if (pos == "mediocampista")
@@ -28,8 +28,8 @@ public class Equipo {
 	public String getNombre() {
 		return nombre;
 	}
-	public HashMap<Jugador> getJugadores() {
-		return jugadores;
+	public HashMap<String,Jugador> getJugadores() {
+		return this.jugadores;
 	}
 	
 }

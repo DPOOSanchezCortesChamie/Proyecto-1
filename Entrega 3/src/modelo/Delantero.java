@@ -2,7 +2,7 @@ package modelo;
 //HMMMM
 public class Delantero extends Jugador {
 	
-	public Delantero(String nombre, int precio, int puntaje) {
+	public Delantero(String nombre, int precio) {
 		super(nombre, precio);
 	}
 	@Override

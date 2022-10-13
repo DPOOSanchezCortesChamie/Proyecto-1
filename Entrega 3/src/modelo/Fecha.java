@@ -6,11 +6,12 @@ import java.util.ArrayList;
 public class Fecha {
 	
 	private int num;
-	private HashMap<HashMap<Partido>> partidos;
+	private HashMap<String,HashMap<String,Partido>> partidos;
 	private ArrayList<Alineacion> alineaciones;
 	
 	public Fecha(int num) {
 		this.num = num;
+		alineaciones = new ArrayList<Alineacion>();
 	}
 	
 	public int getNumFecha() {
@@ -21,15 +22,15 @@ public class Fecha {
 		Partido partido = new Partido(dia, hora);
 		partidos.add(partido);
 	}
-	public void hacerReportePartido(File resultados){
+	public void hacerReportePartido(String resultados){
 		//TODO La primera linea del archivo tiene el nombre de los equipos?
-		String nombreLocal;
-		String nombreVisitante;
+		String nombreLocal = null;
+		String nombreVisitante = null;
 		Partido partido = partidos.get(nombreLocal).get(nombreVisitante);
 		ArrayList<Reporte> reportes = partido.reportarPartido(resultados);
 		actualizarPuntajes(reportes);
 	}
-	private void actualizarPuntajes(ArrayList<Reportes>) {
+	private void actualizarPuntajes(ArrayList<Reporte> reportes) {
 		//TODO
 	}
 }

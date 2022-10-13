@@ -35,7 +35,7 @@ public class Reporte {
 				(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60)
 			puntos+=2;
-		else if (minutosJugador != 0)
+		else if (minutosJugados != 0)
 			puntos+=1;	
 		if (golesRecibidos == 0)
 			puntos +=4;
@@ -48,7 +48,7 @@ public class Reporte {
 			(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60)
 			puntos+=2;
-		else if (minutosJugador != 0)
+		else if (minutosJugados != 0)
 			puntos+=1;	
 		if (golesRecibidos == 0)
 			puntos +=4;
@@ -59,7 +59,7 @@ public class Reporte {
 		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60) 
 			puntos+=2;
-		else if (minutosJugador != 0)
+		else if (minutosJugados != 0)
 			puntos+=1;
 		return puntos;
 	}
@@ -68,7 +68,7 @@ public class Reporte {
 		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60) 
 			puntos+=2;
-		else if (minutosJugador != 0)
+		else if (minutosJugados != 0)
 			puntos+=1;
 		return puntos;
 	}

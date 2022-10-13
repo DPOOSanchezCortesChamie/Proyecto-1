@@ -21,14 +21,14 @@ public class Partido {
 	}
 	
 	//TODO
-	public ArrayList<Reporte> reportarPartido(File resultados) {
-		
+	public ArrayList<Reporte> reportarPartido(String resultados) {
+		return null;
 	}
 	
-	private HashMap<Jugador> getLocales(){
+	private HashMap<String,Jugador> getLocales(){
 		return equipoLocal.getJugadores();
 	}
-	private HashMap<Jugador> getVisitantes(){
+	private HashMap<String,Jugador> getVisitantes(){
 		return equipoVisitante.getJugadores();
 	}
 	

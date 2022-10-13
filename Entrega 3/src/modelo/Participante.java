@@ -8,9 +8,9 @@ public class Participante extends Usuario {
 	public Participante(String nombre, String contrasena) {
 		super(nombre, contrasena);
 	}
-	
-	public crearEquipo(String nombre) {
-		this.equipo = new EquipoFantasia()
+	//TODO hacer llegar presupuesto
+	public void crearEquipo(String nombre) {
+		this.equipo = new EquipoFantasia(nombre, 3);
 	}
 
 }

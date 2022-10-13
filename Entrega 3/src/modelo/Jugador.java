@@ -1,5 +1,6 @@
 package modelo;
 //HMMMM
+import java.util.ArrayList;
 
 public abstract class Jugador {
 	private String nombre;
@@ -20,7 +21,7 @@ public abstract class Jugador {
 	}
 	
 	public void asociarReporte(Reporte reporte) {
-		reportes.add(reporte)
+		reportes.add(reporte);
 	}
 
 	public abstract int calcularPuntos(int fecha);
