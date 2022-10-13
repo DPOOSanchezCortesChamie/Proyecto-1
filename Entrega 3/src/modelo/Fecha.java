@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Fecha {
 	
 	private int num;
-	private HashMap<String,HashMap<String,Partido>> partidos;
+	private ArrayList<Partido> partidos;
 	private ArrayList<Alineacion> alineaciones;
 	
 	public Fecha(int num) {
@@ -26,7 +26,8 @@ public class Fecha {
 		//TODO La primera linea del archivo tiene el nombre de los equipos?
 		String nombreLocal = null;
 		String nombreVisitante = null;
-		Partido partido = partidos.get(nombreLocal).get(nombreVisitante);
+		//TODO buscar partido
+		Partido partido = null;
 		ArrayList<Reporte> reportes = partido.reportarPartido(resultados);
 		actualizarPuntajes(reportes);
 	}

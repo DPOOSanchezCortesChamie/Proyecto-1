@@ -12,7 +12,7 @@ public class Alineacion {
 	
 	public Alineacion() {
 		this.jugadores = new HashMap<String, Jugador>();
-		puntos = actualizarPuntos();
+		actualizarPuntos();
 	}
 	
 	public Jugador getCapitan() {

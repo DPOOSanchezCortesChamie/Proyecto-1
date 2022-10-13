@@ -31,6 +31,10 @@ public class Partido {
 	private HashMap<String,Jugador> getVisitantes(){
 		return equipoVisitante.getJugadores();
 	}
-	
-
+	public String getNombreLocal() {
+		return equipoLocal.getNombre();
+	}
+	public String getNombreVisitante() {
+		return equipoVisitante.getNombre();
+	}
 }
