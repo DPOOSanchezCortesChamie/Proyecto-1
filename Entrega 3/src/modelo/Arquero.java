@@ -1,17 +1,16 @@
 package modelo;
 //HMMMM
-public class Delantero extends Jugador {
-	
-	public Delantero(String nombre, int precio, int puntaje) {
+public class Arquero extends Jugador {
+	public Arquero(String nombre, int precio) {
 		super(nombre, precio);
 	}
 	@Override
 	public int calcularPuntos(int fecha) {
 		Reporte reporte = reportes.get(fecha);
-		return reporte.calcularPuntosDelantero();
+		return reporte.calcularPuntosArquero();
 	}
 	@Override
 	public String darTipo() {
-		return "Delantero";
+		return "Arquero";
 	}
 }

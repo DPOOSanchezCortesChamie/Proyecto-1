@@ -1,5 +1,5 @@
 package modelo;
-
+//HMMMM
 public class Reporte {
 	private int minutosJugados;
 	private int golesAnotados;
@@ -13,74 +13,6 @@ public class Reporte {
 	private int penaltisDetenidos;
 	private Jugador jugador;
 	
-	
-	
-	public int getMinutosJugados() {
-		return minutosJugados;
-	}
-	public void setMinutosJugados(int minutosJugados) {
-		this.minutosJugados = minutosJugados;
-	}
-	public int getGolesAnotados() {
-		return golesAnotados;
-	}
-	public void setGolesAnotados(int golesAnotados) {
-		this.golesAnotados = golesAnotados;
-	}
-	public int getPenaltisAnotados() {
-		return penaltisAnotados;
-	}
-	public void setPenaltisAnotados(int penaltisAnotados) {
-		this.penaltisAnotados = penaltisAnotados;
-	}
-	public int getAutogoles() {
-		return autogoles;
-	}
-	public void setAutogoles(int autogoles) {
-		this.autogoles = autogoles;
-	}
-	public int getAsistencias() {
-		return asistencias;
-	}
-	public void setAsistencias(int asistencias) {
-		this.asistencias = asistencias;
-	}
-	public int getPenaltisErrados() {
-		return penaltisErrados;
-	}
-	public void setPenaltisErrados(int penaltisErrados) {
-		this.penaltisErrados = penaltisErrados;
-	}
-	public int getTarjetasAmarillas() {
-		return tarjetasAmarillas;
-	}
-	public void setTarjetasAmarillas(int tarjetasAmarillas) {
-		this.tarjetasAmarillas = tarjetasAmarillas;
-	}
-	public int getTarjetasRojas() {
-		return tarjetasRojas;
-	}
-	public void setTarjetasRojas(int tarjetasRojas) {
-		this.tarjetasRojas = tarjetasRojas;
-	}
-	public int getGolesRecibidos() {
-		return golesRecibidos;
-	}
-	public void setGolesRecibidos(int golesRecibidos) {
-		this.golesRecibidos = golesRecibidos;
-	}
-	public int getPenaltisDetenidos() {
-		return penaltisDetenidos;
-	}
-	public void setPenaltisDetenidos(int penaltisDetenidos) {
-		this.penaltisDetenidos = penaltisDetenidos;
-	}
-	public Jugador getJugador() {
-		return jugador;
-	}
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
-	}
 	public Reporte(int minutosJugados, int golesAnotados, int penaltisAnotados, int autogoles, int asistencias,
 			int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas, int golesRecibidos, int penaltisDetenidos,
 			Jugador jugador) {
@@ -97,9 +29,47 @@ public class Reporte {
 		this.penaltisDetenidos = penaltisDetenidos;
 		this.jugador = jugador;
 	}
-	//TODO
-	public int calcularPuntos() {
-		return 0;
-	}
 	
+	public int calcularPuntosArquero() {
+		int puntos = (golesAnotados+penaltisAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
+				(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
+		if (minutosJugados >= 60)
+			puntos+=2;
+		else if (minutosJugador != 0)
+			puntos+=1;	
+		if (golesRecibidos == 0)
+			puntos +=4;
+		if (penaltisDetenidos > 0)
+			puntos +=5;
+		return puntos;
+	}
+	public int calcularPuntosDefensa() {
+		int puntos = (golesAnotados+penaltisAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
+			(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
+		if (minutosJugados >= 60)
+			puntos+=2;
+		else if (minutosJugador != 0)
+			puntos+=1;	
+		if (golesRecibidos == 0)
+			puntos +=4;
+		return puntos;
+	}
+	public int calcularPuntosDelantero() {
+		int puntos = (golesAnotados+penaltisAnotados)*4+(asistencias*3)+
+		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
+		if (minutosJugados >= 60) 
+			puntos+=2;
+		else if (minutosJugador != 0)
+			puntos+=1;
+		return puntos;
+	}
+	public int calcularPuntosMediocampista() {
+		int puntos = (golesAnotados+penaltisAnotados)*5+(asistencias*3)+
+		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
+		if (minutosJugados >= 60) 
+			puntos+=2;
+		else if (minutosJugador != 0)
+			puntos+=1;
+		return puntos;
+	}
 }

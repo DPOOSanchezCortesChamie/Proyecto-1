@@ -1,44 +1,29 @@
 package modelo;
+//HMMMM
 
-
-public class Jugador {
+public abstract class Jugador {
 	private String nombre;
 	private int precio;
-	private int puntaje;
-	private Reporte reporte;
+	protected ArrayList<Reporte> reportes;
+	
+	public Jugador(String nombre, int precio) {
+		this.nombre=nombre;
+		this.precio=precio;
+	}
 	
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-
 	public int getPrecio() {
 		return precio;
 	}
-
-
-
-	public void setPrecio(int precio) {
-		this.precio = precio;
+	
+	public void asociarReporte(Reporte reporte) {
+		reportes.add(reporte)
 	}
 
-
-	public int getPuntaje() {
-		return puntaje;
-	}
-
-	public void setPuntaje(int puntaje) {
-		this.puntaje = puntaje;
-	}
-
-	public Jugador(String nombre, int precio) {
-		this.nombre=nombre;
-		this.precio=precio;
-		this.puntaje = 0;
-	}
+	public abstract int calcularPuntos(int fecha);
+	
+	public abstract String darTipo();
 }

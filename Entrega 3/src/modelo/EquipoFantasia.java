@@ -7,11 +7,11 @@ public class EquipoFantasia {
 	private int puntos;
 	
 	public EquipoFantasia(String nombre, int presupuesto) {
-
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.puntos = 0;
 	}
 	
-	
+		
+	//TODO falta todo 
 }
