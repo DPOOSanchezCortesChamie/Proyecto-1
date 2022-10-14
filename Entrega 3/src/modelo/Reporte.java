@@ -32,15 +32,13 @@ public class Reporte {
 	
 	public int calcularPuntosArquero() {
 		int puntos = (golesAnotados+penaltisAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
-				(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
+				(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2)+(penaltisDetenidos*5);
 		if (minutosJugados >= 60)
 			puntos+=2;
 		else if (minutosJugados != 0)
 			puntos+=1;	
 		if (golesRecibidos == 0)
 			puntos +=4;
-		if (penaltisDetenidos > 0)
-			puntos +=5;
 		return puntos;
 	}
 	public int calcularPuntosDefensa() {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Equipo {
 	private String nombre;
 	private HashMap<String,Jugador> jugadores;
+	
 	public Equipo(String nombre) {
 		this.nombre = nombre;
 	}
