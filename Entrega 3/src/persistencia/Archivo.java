@@ -9,26 +9,25 @@ import java.util.ArrayList;
 
 
 public class Archivo {
-	private String tipo;
 	
 	public Archivo() {
 		
 	}
-	public HashMap<String,ArrayList<String[]>> cargarArchivo(String nombreArchivo) {
+	public HashMap<String,ArrayList<String[]>> cargarEquipos(String nombreArchivo) {
         HashMap<String,ArrayList<String[]>> datos = new HashMap<String,ArrayList<String[]>>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
             String linea = br.readLine();
-	        String[] equipos = linea.split(";");
+	        String[] equipos = linea.split(",");
             for (String equipo: equipos) {
             	datos.put(equipo, new ArrayList<String[]>());
             }
             int c = 0;
             while ((linea = br.readLine()) != null) {
-            	String infoJugadores[] = linea.split(";");
-            	int cantidadJugadores = infoJugadores.length/3;
+            	String infoJugadores[] = linea.split(",");
+            	int cantidadJugadores = infoJugadores.length/4;
             	for(int i = 0; i<cantidadJugadores;i++) {
-            		String jugador[] = {infoJugadores[i*3],infoJugadores[i*3+1],infoJugadores[i*3+2]};
+            		String jugador[] = {infoJugadores[i*4],infoJugadores[i*4+1],infoJugadores[i*4+2]};
             		datos.get(equipos[c]).add(jugador);
             	}
             	c++;
@@ -36,70 +35,45 @@ public class Archivo {
             br.close();
             return datos;
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("El archivo " + nombreArchivo + " no se pudo cargar");
         }
         return datos;
     }
 	
-	public ArrayList<String> cargarArchivo1(String nombreArchivo) {
-		ArrayList<String> datos = new ArrayList<String>();
+	public HashMap<String,ArrayList<String[]>> cargarFechas(String nombreArchivo){
+		HashMap<String,ArrayList<String[]>> datos = new HashMap<String,ArrayList<String[]>>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
-			String linea;
-			while((linea=br.readLine())!=null) {
-				datos.add(linea);
-			}			
-			br.close();
-			return datos;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return datos;
-	}
-	
-	public HashMap<Integer,ArrayList<String[]>> cargarFechas(){
-		HashMap<Integer,ArrayList<String[]>> fechas = new HashMap<Integer,ArrayList<String[]>>();
-		ArrayList<String> datos;
-		ArrayList<String[]> infoFecha = new ArrayList<String[]>();
-
-		datos = cargarArchivo1("fechas.csv");
-		for (String dato: datos) {
-			String valores[] = dato.split(";");
-			infoFecha.add(valores);
-			fechas.put(Integer.parseInt(valores[0]), infoFecha);
-		}
-		return fechas;
-	}
-	
-	public HashMap<String,ArrayList<String>> cargarFechas1(String nombreArchivo){
-		HashMap<String,ArrayList<String>> datos = new HashMap<String,ArrayList<String>>();
-		ArrayList<String> infoFecha = new ArrayList<String>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
-			String linea = br.readLine();
-			while(linea!= null) {
-				String infoFechas[] = linea.split(";");
-				String numeroFecha = infoFechas[0];
-				String equipo1 = infoFechas[1];
-				String equipo2 = infoFechas[2];
-				String dia = infoFechas[3];
-				String hora = infoFechas[4];
-				infoFecha.add(equipo1);
-				infoFecha.add(equipo2);
-				infoFecha.add(dia);
-				infoFecha.add(hora);
-				datos.put(numeroFecha, infoFecha);
-				
-			}
-			
-			br.close();
-			return datos;
-		}catch (Exception e) {
-            // TODO: handle exception
+            BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
+            String linea = null;
+            while ((linea = br.readLine()) != null) {
+            	String info[] = linea.split(",");
+            	if(datos.get(info[0])==null) 
+            		datos.put(info[0], new ArrayList<String[]>());
+            	String fecha[] = {info[1],info[2],info[3],info[4]};
+            	datos.get(info[0]).add(fecha);
+            }
+            br.close();
+        } catch (Exception e) {
+        	System.out.println("El archivo " + nombreArchivo + " no se pudo cargar");
         }
-		return datos;
+        return datos;
 	}
 	
+	public ArrayList<String[]> cargarReportes(String nombreArchivo){
+		ArrayList<String[]> reporte = new ArrayList<String[]>();
+		try {
+            BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
+            String linea = null;
+            while ((linea = br.readLine()) != null) {
+            	String info[] = linea.split(",");
+            	reporte.add(info);
+            }
+            br.close();
+        } catch (Exception e) {
+        	System.out.println("El archivo " + nombreArchivo + " no se pudo cargar");
+        }
+		return reporte;
+	}
 }
 
 

@@ -15,8 +15,9 @@ public class TemporadaFantasia {
 	
 	public void crearTemporadaReal(String nominas, String partidos) {
 		temporada = new	TemporadaReal();
-		temporada.crearFechas(partidos);
 		temporada.crearEquipos(nominas);
+		temporada.crearFechas(partidos);
+		
 	}
 	
 	public void hacerReportePartido(String resultado) {

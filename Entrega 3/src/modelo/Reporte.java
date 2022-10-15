@@ -3,7 +3,6 @@ package modelo;
 public class Reporte {
 	private int minutosJugados;
 	private int golesAnotados;
-	private int penaltisAnotados;
 	private int autogoles;
 	private int asistencias;
 	private int penaltisErrados;
@@ -13,13 +12,12 @@ public class Reporte {
 	private int penaltisDetenidos;
 	private Jugador jugador;
 	
-	public Reporte(int minutosJugados, int golesAnotados, int penaltisAnotados, int autogoles, int asistencias,
+	public Reporte(int minutosJugados, int golesAnotados, int autogoles, int asistencias,
 			int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas, int golesRecibidos, int penaltisDetenidos,
 			Jugador jugador) {
 
 		this.minutosJugados = minutosJugados;
 		this.golesAnotados = golesAnotados;
-		this.penaltisAnotados = penaltisAnotados;
 		this.autogoles = autogoles;
 		this.asistencias = asistencias;
 		this.penaltisErrados = penaltisErrados;
@@ -31,7 +29,7 @@ public class Reporte {
 	}
 	
 	public int calcularPuntosArquero() {
-		int puntos = (golesAnotados+penaltisAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
+		int puntos = (golesAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
 				(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2)+(penaltisDetenidos*5);
 		if (minutosJugados >= 60)
 			puntos+=2;
@@ -42,7 +40,7 @@ public class Reporte {
 		return puntos;
 	}
 	public int calcularPuntosDefensa() {
-		int puntos = (golesAnotados+penaltisAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
+		int puntos = (golesAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+
 			(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60)
 			puntos+=2;
@@ -53,7 +51,7 @@ public class Reporte {
 		return puntos;
 	}
 	public int calcularPuntosDelantero() {
-		int puntos = (golesAnotados+penaltisAnotados)*4+(asistencias*3)+
+		int puntos = (golesAnotados)*4+(asistencias*3)+
 		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60) 
 			puntos+=2;
@@ -62,7 +60,7 @@ public class Reporte {
 		return puntos;
 	}
 	public int calcularPuntosMediocampista() {
-		int puntos = (golesAnotados+penaltisAnotados)*5+(asistencias*3)+
+		int puntos = (golesAnotados)*5+(asistencias*3)+
 		(penaltisErrados*-2)+(tarjetasAmarillas*-1)+(tarjetasRojas*-3)+(autogoles*-2);
 		if (minutosJugados >= 60) 
 			puntos+=2;
