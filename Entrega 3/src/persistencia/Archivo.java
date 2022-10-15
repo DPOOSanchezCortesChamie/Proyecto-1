@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.util.HashMap;
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -38,6 +40,68 @@ public class Archivo {
         }
         return datos;
     }
+	
+	public ArrayList<String> cargarArchivo1(String nombreArchivo) {
+		ArrayList<String> datos = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
+			String linea;
+			while((linea=br.readLine())!=null) {
+				datos.add(linea);
+			}			
+			br.close();
+			return datos;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return datos;
+	}
+	
+	public HashMap<Integer,ArrayList<String[]>> cargarFechas(){
+		HashMap<Integer,ArrayList<String[]>> fechas = new HashMap<Integer,ArrayList<String[]>>();
+		ArrayList<String> datos;
+		ArrayList<String[]> infoFecha = new ArrayList<String[]>();
 
+		datos = cargarArchivo1("fechas.csv");
+		for (String dato: datos) {
+			String valores[] = dato.split(";");
+			infoFecha.add(valores);
+			fechas.put(Integer.parseInt(valores[0]), infoFecha);
+		}
+		return fechas;
+	}
+	
+	public HashMap<String,ArrayList<String>> cargarFechas1(String nombreArchivo){
+		HashMap<String,ArrayList<String>> datos = new HashMap<String,ArrayList<String>>();
+		ArrayList<String> infoFecha = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo));
+			String linea = br.readLine();
+			while(linea!= null) {
+				String infoFechas[] = linea.split(";");
+				String numeroFecha = infoFechas[0];
+				String equipo1 = infoFechas[1];
+				String equipo2 = infoFechas[2];
+				String dia = infoFechas[3];
+				String hora = infoFechas[4];
+				infoFecha.add(equipo1);
+				infoFecha.add(equipo2);
+				infoFecha.add(dia);
+				infoFecha.add(hora);
+				datos.put(numeroFecha, infoFecha);
+				
+			}
+			
+			br.close();
+			return datos;
+		}catch (Exception e) {
+            // TODO: handle exception
+        }
+		return datos;
+	}
+	
 }
+
+
+
 
