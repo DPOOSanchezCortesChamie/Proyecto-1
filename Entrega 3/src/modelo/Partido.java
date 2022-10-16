@@ -36,26 +36,45 @@ public class Partido {
 		HashMap<String,Jugador> locales = getLocales();
 		HashMap<String,Jugador> visitantes = getVisitantes();
 		for(int i = 1; i < resultados.size();i++) {
+			boolean isLocal = true;
 			String[] r = resultados.get(i);
 			Jugador jugador = locales.get(r[0]);
-			//Tengo duda si uno busca en un hashmap una llave inexistente si si retorna null
-			if(jugador == null)
+			if(jugador == null) {
+				isLocal = false;
 				jugador = visitantes.get(r[0]);
-			Reporte reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),p(r[10]),
-					p(r[11]),p(r[7]),p(r[8]),jugador);
+			}
+			Reporte reporte;
+			if(isLocal && this.golesLocal>this.golesVisitante) {
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
+						p(r[10]),p(r[11]),p(r[7]),p(r[8]),true);
+			} else if (this.golesVisitante>this.golesLocal) {
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
+						p(r[10]),p(r[11]),p(r[7]),p(r[8]),true);
+			} else {
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
+						p(r[10]),p(r[11]),p(r[7]),p(r[8]),false);
+			}
 			if(jugador!=null)
 				jugador.asociarReporte(reporte);
 		}
 		//Se asegura que si hay un jugador que no aparece en los reportes (por no haber jugado) a este se le ponga un reporte vacio
 		for(String jugador:locales.keySet()) {
 			if(locales.get(jugador).reportado(this.fecha)){
-				Reporte vacio = new Reporte(0,0,0,0,0,0,0,0,0,locales.get(jugador));
+				Reporte vacio;
+				if(this.golesLocal>this.golesVisitante)
+					vacio = new Reporte(0,0,0,0,0,0,0,0,0,true);
+				else
+					vacio = new Reporte(0,0,0,0,0,0,0,0,0,false);
 				locales.get(jugador).asociarReporte(vacio);
 			}
 		}
 		for(String jugador:visitantes.keySet()) {
 			if(visitantes.get(jugador).reportado(this.fecha)){
-				Reporte vacio = new Reporte(0,0,0,0,0,0,0,0,0,visitantes.get(jugador));
+				Reporte vacio;
+				if(this.golesLocal<this.golesVisitante)
+					vacio = new Reporte(0,0,0,0,0,0,0,0,0,true);
+				else
+					vacio = new Reporte(0,0,0,0,0,0,0,0,0,false);
 				visitantes.get(jugador).asociarReporte(vacio);
 			}
 		}

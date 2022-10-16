@@ -1,6 +1,5 @@
 package modelo;
 //HMMMM
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Equipo {

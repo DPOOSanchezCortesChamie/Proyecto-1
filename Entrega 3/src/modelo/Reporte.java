@@ -10,11 +10,11 @@ public class Reporte {
 	private int tarjetasRojas;
 	private int golesRecibidos;
 	private int penaltisDetenidos;
-	private Jugador jugador;
+	private boolean victoria;
 	
 	public Reporte(int minutosJugados, int golesAnotados, int autogoles, int asistencias,
-			int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas, int golesRecibidos, int penaltisDetenidos,
-			Jugador jugador) {
+			int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas, int golesRecibidos, 
+			int penaltisDetenidos, boolean victoria) {
 
 		this.minutosJugados = minutosJugados;
 		this.golesAnotados = golesAnotados;
@@ -25,7 +25,7 @@ public class Reporte {
 		this.tarjetasRojas = tarjetasRojas;
 		this.golesRecibidos = golesRecibidos;
 		this.penaltisDetenidos = penaltisDetenidos;
-		this.jugador = jugador;
+		this.victoria = victoria;
 	}
 	
 	public int calcularPuntosArquero() {

@@ -13,18 +13,25 @@ public abstract class Jugador {
 		this.nombre=nombre;
 		this.precio=precio;
 		this.numero=numero;
-	}
-	
+	}	
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
-
 	public int getPrecio() {
-		return precio;
+		return this.precio;
 	}
-	
 	public int getNumero() {
-		return numero;
+		return this.numero;
+	}
+	@Override
+	public String toString() {
+		return darTipo() + " - " + this.nombre + " " + numero + " / $" + precio;
+	}
+	public boolean equals(Jugador j) {
+		if((j.getNombre().equals(this.nombre)&&j.getPrecio()==this.precio&&j.getNumero()==this.numero)
+				|| j == null)
+			return true;
+		return false;
 	}
 	
 	public void asociarReporte(Reporte reporte) {

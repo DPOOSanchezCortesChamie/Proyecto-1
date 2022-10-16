@@ -1,17 +1,17 @@
 package modelo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Alineacion {
 	
-	private HashMap<String,Jugador> jugadores;
+	private ArrayList<Jugador> jugadores;
 	private Jugador capitan;
 	private int puntos;
 	private Fecha fecha;
 	//TODO como hacer llegar esta info
 	
 	public Alineacion() {
-		this.jugadores = new HashMap<String, Jugador>();
+		this.jugadores = new ArrayList<Jugador>();
 		actualizarPuntos();
 	}
 	
@@ -24,17 +24,21 @@ public class Alineacion {
 	}
 	
 	public void quitarJugador(Jugador jugador) {
-		this.jugadores.remove(jugador.getNombre(), jugador);
+		this.jugadores.remove(jugador);
 	}
 	
 	public void meterJugador(Jugador jugador) {
-		this.jugadores.put(jugador.getNombre(), jugador);
+		this.jugadores.add(jugador);
+	}
+	
+	public ArrayList<Jugador> getJugadores(){
+		return this.jugadores;
 	}
 	
 	public void actualizarPuntos() {
 		int total = 0;
-		for(String nombre: jugadores.keySet()) {
-			total += jugadores.get(nombre).calcularPuntos(fecha.getNumFecha());
+		for(Jugador jugador: jugadores) {
+			total += jugador.calcularPuntos(fecha.getNumFecha());
 		}
 		puntos = total;
 	}
