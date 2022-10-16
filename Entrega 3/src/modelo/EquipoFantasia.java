@@ -11,7 +11,10 @@ public class EquipoFantasia {
 		this.presupuesto = presupuesto;
 		this.puntos = 0;
 	}
-	
 		
 	//TODO falta todo :)
+	
+	public void AgregarJugador(String nombre, int precio, String pos) {
+		
+	}
 }

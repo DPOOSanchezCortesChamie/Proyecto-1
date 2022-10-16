@@ -43,5 +43,10 @@ public class TemporadaReal {
 	public int getCantidadFechas() {
 		return fechas.size();
 	}
+	public HashMap<String, Equipo> getEquipos() {
+		return this.equipos;
+	}
+
+	
 	
 }
