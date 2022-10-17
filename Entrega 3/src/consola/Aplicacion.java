@@ -6,6 +6,7 @@ import modelo.Equipo;
 import modelo.Participante;
 import modelo.Jugador;
 import modelo.EquipoFantasia;
+import modelo.Alineacion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,24 +30,24 @@ public class Aplicacion {
 	
 	private void adminCrearTemporada() {
 		System.out.println("Ingrese el nombre del archivo con los equipos");
-		String nominas = sc.next();
+		String nominas = sc.nextLine();
 		System.out.println("Ingrese el nombre del archivo con los partidos");
-		String fechas = sc.next();
+		String fechas = sc.nextLine();
 		System.out.println("Ingrese el presupuesto para los equipos de fantasia");
-		int p = sc.nextInt();
+		int p = Integer.parseInt(sc.nextLine());
 		System.out.println("Ingrese el nombre de su temporada");
-		String nombre = sc.next();
+		String nombre = sc.nextLine();
 		while(temporadas.get(nombre)!=null) {
 			System.out.println("El nombre elegido no esta disponible");
 			System.out.println("Ingrese el nombre de su temporada");
-			nombre = sc.next();
+			nombre = sc.nextLine();
 		}
-		temporadas.put(nombre,adminActual.crearTemporada(nominas,fechas,p,nombre));
+		temporadas.put(nombre,adminActual.crearTemporada(nominas,fechas,p));
 	}
 	
 	private void adminReportarPartido() {
 		System.out.println("Ingrese el nombre del archivo del partido");
-		String reporte = sc.next();
+		String reporte = sc.nextLine();
 		boolean sePudo = adminActual.registrarResultadoPartido(reporte);
 		if (sePudo)
 			System.out.println("Partido registrado exitosamente");
@@ -75,7 +76,7 @@ public class Aplicacion {
 			System.out.println("4. Mostrar informacion temporada");
 			System.out.println("0. Cerrar sesion");
 			System.out.println("Seleccione una opcion: ");
-			ans = sc.nextInt();
+			ans = Integer.parseInt(sc.nextLine());
 			if (ans == 1)
 				adminCrearTemporada();
 			else if (ans == 2)
@@ -84,19 +85,18 @@ public class Aplicacion {
 				adminConcluirFecha();
 			else if (ans == 4)
 				adminMostrarInfoTemporada();
-			else if (ans == 0) {
+			else if (ans == 0) 
 				this.adminActual = null;
-		}
 		}
 	}
 	
 	private void userCrearEquipoFantasia() {
 		System.out.println("Ingrese el nombre de su equipo: ");
-		String nombre = sc.next();
+		String nombre = sc.nextLine();
 		TemporadaFantasia temporada = null;
 		while (temporada == null) {
 			System.out.println("Ingrese el nombre de la temporada de fantasia al que va a pertenecer: ");
-			String n = sc.next();
+			String n = sc.nextLine();
 			temporada = temporadas.get(n);
 		}
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
@@ -137,7 +137,7 @@ public class Aplicacion {
 			while(e == null) {
 				System.out.println("Los equipos disponibles son: " + equiposString);
 				System.out.println("Escriba el nombre de un equipo para ver sus jugadores: ");
-				String eName = sc.next();
+				String eName = sc.nextLine();
 				e = equipos.get(eName);
 			}
 			HashMap<String, Jugador> jugadores = e.getJugadores();
@@ -167,7 +167,7 @@ public class Aplicacion {
 							t=false;
 						else if (j.darTipo().equals("Mediocampista") && cPos[2]==5)
 							t=false;
-						else if (cPos[3]==3)
+						else if (j.darTipo().equals("Delantero") &&cPos[3]==3)
 							t=false;
 						if(!t) {
 							System.out.println("No puedes tener mas jugadores de esa posicion");
@@ -187,27 +187,154 @@ public class Aplicacion {
 		return j;
 	}
 	
+	private Jugador buscarJugador(EquipoFantasia e, ArrayList<Jugador> lista, int cPos[]) {
+		Jugador j = null;
+		while(j == null) {
+			System.out.println("Escriba el nombre del jugador que desea incluir en su alineacion: ");
+			String jName = sc.nextLine();
+			j = e.getJugadores().get(jName);
+			boolean t = true;
+			if(j!=null) {
+				if(j.darTipo().equals("Arquero") && cPos[0]==1)
+					t=false;
+				else if (j.darTipo().equals("Defensa") && cPos[1]==4)
+					t=false;
+				else if (j.darTipo().equals("Mediocampista") && cPos[2]==4)
+					t=false;
+				else if (j.darTipo().equals("Delantero") &&cPos[3]==2)
+					t=false;
+			
+				if(!t) {
+					System.out.println("No puedes tener mas jugadores de esa posicion");
+					j = null;
+				} else {
+					if(lista.contains(j))
+						t = false;
+					if(!t) {
+						System.out.println("El jugador elegido ya se encuentra en el equipo");
+						j = null;
+					}
+				}
+			}
+		}
+		return j;
+	}
 	private EquipoFantasia userSeleccionarEquipoFantasia() {
+		System.out.println("Ingrese el nombre de equipo a usar");
+		String nombre = sc.nextLine();
+		return this.userActual.getEquipo(nombre);
+	}
+	
+	private void userCompraVenta(EquipoFantasia equipo) {
+		System.out.println("Jugadores del equipo: ");
+		Jugador aVender = null;
+		Jugador aComprar = null;
+		HashMap<String, Jugador> activos = equipo.getJugadores();
+		ArrayList<Jugador> p = new ArrayList<Jugador>();
+		while(aVender == null) {
+			for(String j: activos.keySet()) {
+				System.out.println(activos.get(j).print());
+				p.add(activos.get(j));
+			}
+			System.out.println("Ingrese el nombre del jugador a vender");
+			String vendible = sc.nextLine();
+			aVender = activos.get(vendible);
+		}
+		int base[] = {2,5,5,3};
+		if(aVender.darTipo().equals("Arquero")) 
+			base[0]--;
+		else if(aVender.darTipo().equals("Defensa"))
+			base[1]--;
+		else if(aVender.darTipo().equals("Mediocampista"))
+			base[2]--;
+		else if(aVender.darTipo().equals("Delantero"))
+			base[3]--;
 		
+		System.out.println("Ingrese el jugador a comprar: ");
+		aComprar = buscarJugador(equipo.getTemporada().getEquiposReales(),
+			p,equipo.getMonto()+(aVender.getPrecio()*0.97),base);
+		
+		System.out.println("Seguro que desea vender a " + aVender.getNombre() + " y comprar a " + aComprar.getNombre());
+		System.out.println("Esta operacion no es reversible y perdera 3% del valor de la venta");
+		System.out.println("Ingrese 'si' para confirmar y 'no' para cancelar la operacion");
+		String resp = sc.nextLine();
+		if(resp.equals("si")) {
+			equipo.venderJugador(aVender);
+			equipo.comprarJugador(aComprar);
+			System.out.println("Compra realizada exitosamente");
+		} else {
+			System.out.println("Orden de compra cancelada");
+		}
+	}
+	
+	private void modificarAlineacion(EquipoFantasia equipo) {
+		HashMap<String, Jugador> activos = equipo.getJugadores();
+		System.out.println("Jugadores del disponibles: ");
+		for(String j: activos.keySet()) {
+			System.out.println(activos.get(j).print());
+		}
+		int base[] = {0,0,0,0};
+		ArrayList<Jugador> alineacion = new ArrayList<Jugador>();
+		System.out.println("Escoja los 11 jugadores de su alineacion");
+		System.out.println("Debe elegir 1 arquero, 4 defensas, 4 mediocampistas y 2 delanteros");
+		for(int i = 0; i < 11; i++) {
+			Jugador j = buscarJugador(equipo,alineacion,base);
+			alineacion.add(j);
+			if(j.darTipo().equals("Arquero"))
+				base[0]++;
+			else if (j.darTipo().equals("Defensa"))
+				base[1]++;
+			else if (j.darTipo().equals("Mediocampista"))
+				base[2]++;
+			else
+				base[3]++;
+		}
+		Jugador capitan = null;
+		System.out.println("Escriba el nombre del capitan de su alineacion: ");
+		while(capitan == null) {
+			for(String j: activos.keySet()) {
+				System.out.println(activos.get(j).print());
+			}
+			String capi = sc.nextLine();
+			capitan = activos.get(capi);
+			if(!alineacion.contains(capitan)) {
+				capitan = null;
+				System.out.println("El jugador elegido no esta en la alineacion");
+			}
+		}
+		Alineacion a = equipo.designarAlineacion(alineacion);
+		a.setCapitan(capitan);
+	}
+	
+	private void darInfoEquipo(EquipoFantasia equipo) {
+		System.out.println("Nombre: " + equipo.getNombre());
+		System.out.println("Puntos: " + equipo.getPuntos());
+		System.out.println("Dinero restante: " + equipo.getMonto());
 	}
 	
 	public void menuUser() {
 		int ans = 999;
 		EquipoFantasia e = null;
 		while(ans != 0) {
-			
 			System.out.println("Menu de opciones JUGADOR");
 			System.out.println("1. Crear un equipo de fantasia");
 			System.out.println("2. Seleccionar equipo de fantasia a usar");
 			System.out.println("3. Iniciar proceso de compra-venta");
 			System.out.println("4. Modificar alineacion de fantasia");
+			System.out.println("5. Dar informacion del equipo");
 			System.out.println("0. Cerrar sesion");
 			System.out.println("Seleccione una opcion: ");
-			ans = sc.nextInt();
+			ans = Integer.parseInt(sc.nextLine());
 			if (ans==1) 
 				userCrearEquipoFantasia();
 			else if (ans==2)
 				e=userSeleccionarEquipoFantasia();
+			else if (ans==3)
+				userCompraVenta(e);
+			else if (ans==4)
+				modificarAlineacion(e);
+			else if (ans==5)
+				darInfoEquipo(e);
 			else if (ans==0)
 				this.userActual = null;
 		}
@@ -215,9 +342,9 @@ public class Aplicacion {
 	
 	private void iniciarSesion() {
 		System.out.println("Ingrese nombre de usuario: ");
-		String user = sc.next();
+		String user = sc.nextLine();
 		System.out.println("Ingrese su contraseña: ");
-		String pswrd = sc.next();
+		String pswrd = sc.nextLine();
 		for(Admin a: admins) {
 			if(a.isUser(user, pswrd)) {
 				adminActual = a;
@@ -233,12 +360,12 @@ public class Aplicacion {
 		}
 	}
 	private void crearUsuario() {
-		System.out.println("Ingrese nombre de usuario: ");
-		String user = sc.next();
-		System.out.println("Ingrese su contraseña: ");
-		String pswrd = sc.next();
+		System.out.println("Ingrese nombre de usuario:");
+		String user = sc.nextLine();
+		System.out.println("Ingrese su contraseña:");
+		String pswrd = sc.nextLine();
 		System.out.println("Ingrese su tipo de usuario (jugador o administrador): ");
-		String tipo = sc.next();
+		String tipo = sc.nextLine();
 		if(tipo.equals("administrador")) {
 			boolean esta = false;
 			for(Admin a: admins) {
@@ -271,7 +398,7 @@ public class Aplicacion {
 			System.out.println("1. Iniciar sesion");
 			System.out.println("2. Crear usuario");
 			System.out.println("0. Finalizar programa");
-			ans = sc.nextInt();
+			ans = Integer.parseInt(sc.nextLine());
 			if (ans == 1)
 				iniciarSesion();
 			else if (ans == 2)

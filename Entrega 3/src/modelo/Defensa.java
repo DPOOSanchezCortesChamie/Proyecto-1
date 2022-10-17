@@ -7,8 +7,13 @@ public class Defensa extends Jugador {
 	}
 	@Override
 	public int calcularPuntos(int fecha) {
-		Reporte reporte = reportes.get(fecha-1);
-		return reporte.calcularPuntosDefensa();
+		try {
+			Reporte reporte = reportes.get(fecha-1);
+			return reporte.calcularPuntosDefensa();
+		} catch (Exception e) {
+			return 0;
+		}
+		
 	}
 	@Override
 	public String darTipo() {

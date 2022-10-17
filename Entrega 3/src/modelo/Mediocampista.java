@@ -7,8 +7,12 @@ public class Mediocampista extends Jugador {
 	}
 	@Override
 	public int calcularPuntos(int fecha) {
-		Reporte reporte = reportes.get(fecha-1);
-		return reporte.calcularPuntosMediocampista();
+		try {
+			Reporte reporte = reportes.get(fecha-1);
+			return reporte.calcularPuntosMediocampista();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	@Override
 	public String darTipo() {

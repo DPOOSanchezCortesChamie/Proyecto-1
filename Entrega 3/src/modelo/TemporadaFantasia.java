@@ -12,11 +12,9 @@ public class TemporadaFantasia {
 	private Fecha fechaSiguiente;
 	private Fecha fechaActual;
 	private ArrayList<EquipoFantasia> equipos;
-	private String nombre;
 	
-	public TemporadaFantasia(int presupuesto, String nombre) {
+	public TemporadaFantasia(int presupuesto) {
 		this.presupuesto=presupuesto;
-		this.nombre=nombre;
 		this.equipos = new ArrayList<EquipoFantasia>();
 	}
 	
@@ -63,7 +61,6 @@ public class TemporadaFantasia {
 			return equipos;
 		}
 	}
-	
 	public void actualizarDatos() {
 		for(EquipoFantasia e: equipos) {
 			e.actualizarPuntos();

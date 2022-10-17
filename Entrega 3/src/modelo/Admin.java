@@ -20,8 +20,8 @@ public class Admin {
 	public List<EquipoFantasia> getMejoresTres() {
 		return temporada.mejoresTresEquipos();
 	}
-	public TemporadaFantasia crearTemporada(String nominas, String partidos, int presupuesto, String nombre) {
-		temporada = new TemporadaFantasia(presupuesto, nombre);
+	public TemporadaFantasia crearTemporada(String nominas, String partidos, int presupuesto) {
+		temporada = new TemporadaFantasia(presupuesto);
 		temporada.crearTemporadaReal(nominas, partidos);
 		return temporada;
 	}

@@ -6,13 +6,13 @@ public abstract class Jugador {
 	private String nombre;
 	private int precio;
 	private int numero;
-	private Equipo equipo;
 	protected ArrayList<Reporte> reportes;
 	
 	public Jugador(String nombre, int precio, int numero) {
 		this.nombre=nombre;
 		this.precio=precio;
 		this.numero=numero;
+		this.reportes = new ArrayList<Reporte>();
 	}	
 	public String getNombre() {
 		return this.nombre;

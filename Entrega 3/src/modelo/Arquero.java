@@ -6,8 +6,12 @@ public class Arquero extends Jugador {
 	}
 	@Override
 	public int calcularPuntos(int fecha) {
-		Reporte reporte = reportes.get(fecha-1);
-		return reporte.calcularPuntosArquero();
+		try {
+			Reporte reporte = reportes.get(fecha-1);
+			return reporte.calcularPuntosArquero();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	@Override
 	public String darTipo() {

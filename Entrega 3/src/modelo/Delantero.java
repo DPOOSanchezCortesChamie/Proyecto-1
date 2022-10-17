@@ -7,8 +7,12 @@ public class Delantero extends Jugador {
 	}
 	@Override
 	public int calcularPuntos(int fecha) {
-		Reporte reporte = reportes.get(fecha-1);
-		return reporte.calcularPuntosDelantero();
+		try {
+			Reporte reporte = reportes.get(fecha-1);
+			return reporte.calcularPuntosDelantero();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	@Override
 	public String darTipo() {

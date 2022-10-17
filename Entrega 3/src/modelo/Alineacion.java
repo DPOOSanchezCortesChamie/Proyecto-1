@@ -8,7 +8,6 @@ public class Alineacion {
 	private Jugador capitan;
 	private int puntos;
 	private Fecha fecha;
-	//TODO como hacer llegar esta info
 	
 	public Alineacion(ArrayList<Jugador> jugadores, Fecha fecha) {
 		this.jugadores = jugadores;
@@ -23,15 +22,8 @@ public class Alineacion {
 		this.capitan = jugador;
 	}
 	
-	public void quitarJugador(Jugador jugador) {
-		this.jugadores.remove(jugador);
-	}
 	public int getPuntos() {
 		return this.puntos;
-	}
-	
-	public void meterJugador(Jugador jugador) {
-		this.jugadores.add(jugador);
 	}
 	
 	public ArrayList<Jugador> getJugadores(){

@@ -3,15 +3,12 @@ package modelo;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import persistencia.Archivo;
-
 public class Partido {
 	
 	private String dia;
 	private String hora;
 	private int golesLocal;
 	private int golesVisitante;
-	private int duracion;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
 	private ArrayList<Reporte> reportes;
@@ -45,21 +42,21 @@ public class Partido {
 			}
 			Reporte reporte;
 			if(isLocal && this.golesLocal>this.golesVisitante) {
-				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
-						p(r[10]),p(r[11]),p(r[7]),p(r[8]),true);
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[8]),
+						p(r[9]),p(r[10]),p(r[6]),p(r[7]),true);
 			} else if (this.golesVisitante>this.golesLocal) {
-				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
-						p(r[10]),p(r[11]),p(r[7]),p(r[8]),true);
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[8]),
+						p(r[9]),p(r[10]),p(r[6]),p(r[7]),true);
 			} else {
-				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[9]),
-						p(r[10]),p(r[11]),p(r[7]),p(r[8]),false);
+				reporte = new Reporte(p(r[2])-p(r[1]),p(r[3]),p(r[4]),p(r[5]),p(r[8]),
+						p(r[9]),p(r[10]),p(r[6]),p(r[7]),false);
 			}
 			if(jugador!=null)
 				jugador.asociarReporte(reporte);
 		}
 		//Se asegura que si hay un jugador que no aparece en los reportes (por no haber jugado) a este se le ponga un reporte vacio
 		for(String jugador:locales.keySet()) {
-			if(locales.get(jugador).reportado(this.fecha)){
+			if(!locales.get(jugador).reportado(this.fecha)){
 				Reporte vacio;
 				if(this.golesLocal>this.golesVisitante)
 					vacio = new Reporte(0,0,0,0,0,0,0,0,0,true);
@@ -69,7 +66,7 @@ public class Partido {
 			}
 		}
 		for(String jugador:visitantes.keySet()) {
-			if(visitantes.get(jugador).reportado(this.fecha)){
+			if(!visitantes.get(jugador).reportado(this.fecha)){
 				Reporte vacio;
 				if(this.golesLocal<this.golesVisitante)
 					vacio = new Reporte(0,0,0,0,0,0,0,0,0,true);
