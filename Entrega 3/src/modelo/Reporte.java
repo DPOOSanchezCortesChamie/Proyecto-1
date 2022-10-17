@@ -27,6 +27,9 @@ public class Reporte {
 		this.penaltisDetenidos = penaltisDetenidos;
 		this.victoria = victoria;
 	}
+	public boolean getVictoria() {
+		return this.victoria;
+	}
 	
 	public int calcularPuntosArquero() {
 		int puntos = (golesAnotados)*6+(asistencias*3)+(penaltisErrados*-2)+

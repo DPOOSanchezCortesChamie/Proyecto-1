@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class EquipoFantasia {
 	
 	private String nombre;
-	private int monto;
+	private double monto;
 	private int puntos;
 	private TemporadaFantasia temporada;
 	private ArrayList<Jugador> jugadores;
@@ -20,12 +20,22 @@ public class EquipoFantasia {
 		this.jugadores = new ArrayList<Jugador>();
 		this.alineaciones = new ArrayList<Alineacion>();
 	}
-	//TODO falta todo :)
-	
-	public void agregarJugador(Jugador jugador) {
+	public void comprarJugador(Jugador jugador) {
 		jugadores.add(jugador);
+		monto -= jugador.getPrecio();
 	}
-	public void eliminarJugador(Jugador jugador) {
+	public int getPuntos() {
+		return this.puntos;
+	}
+	public void venderJugador(Jugador jugador) {
 		jugadores.remove(jugador);
+		double remuneracion = jugador.getPrecio()*0.97;
+		monto += remuneracion;
+	}
+	public void concluirFecha() {
+		alineaciones.add(proxima);
+	}
+	public void designarAlienacion(ArrayList<Jugador> jugadores) {
+		this.proxima = new Alineacion(jugadores, temporada.getFechaSiguiente());
 	}
 }

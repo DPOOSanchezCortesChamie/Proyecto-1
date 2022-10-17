@@ -42,7 +42,7 @@ public class Aplicacion {
 		temporadas.put(nombre,adminActual.crearTemporada(nominas,fechas,p,nombre));
 	}
 	//TODO falta reportar resultado
-	public void menuAdmin() {
+	private void menuAdmin() {
 		int ans = 999;
 		while(ans != 0) {
 			System.out.println("Menu de opciones ADMINISTRADOR");
@@ -72,7 +72,7 @@ public class Aplicacion {
 		System.out.println("Escoja los 15 jugadores de su equipo de fantasia");
 		System.out.println("Luego podra venderlos (al 97% del valor de compra) y comprar otros");
 		System.out.println("Debe elegir 2 arqueros, 5 defensas, 5 mediocampistas y 3 delanteros");
-		int monto = temporada.getPresupuesto();
+		double monto = temporada.getPresupuesto();
 		int cPos[] = {0,0,0,0};
 		HashMap<String, Equipo> equipos = temporada.getEquiposReales();
 		for(int i = 0; i<15; i++) {
@@ -93,8 +93,8 @@ public class Aplicacion {
 		System.out.println("Equipo creado exitosamente!");
 	}
 	
-	public Jugador buscarJugador(HashMap<String,Equipo> equipos, 
-			ArrayList<Jugador> listaJugadores, int monto, int cPos[]) {
+	private Jugador buscarJugador(HashMap<String,Equipo> equipos, 
+			ArrayList<Jugador> listaJugadores, double monto, int cPos[]) {
 		Jugador j = null;
 		Equipo e = null;
 		String equiposString = "";
@@ -169,26 +169,26 @@ public class Aplicacion {
 		}
 	}
 	
-	public void iniciarSesion() {
+	private void iniciarSesion() {
 		System.out.println("Ingrese nombre de usuario: ");
 		String user = sc.next();
 		System.out.println("Ingrese su contraseña: ");
 		String pswrd = sc.next();
 		for(Admin a: admins) {
 			if(a.isUser(user, pswrd)) {
-				a = adminActual;
+				adminActual = a;
 				menuAdmin();
 			}
 		}
 		if(adminActual == null) {
 			for(Participante a: usuarios) {
 				if(a.isUser(user, pswrd))
-					a = userActual;
+					userActual = a;
 					menuUser();
 			}
 		}
 	}
-	public void crearUsuario() {
+	private void crearUsuario() {
 		System.out.println("Ingrese nombre de usuario: ");
 		String user = sc.next();
 		System.out.println("Ingrese su contraseña: ");
@@ -236,8 +236,9 @@ public class Aplicacion {
 				System.out.println("Gracias por usar la aplicacion");
 		}
 	}
-	public void main(String args[]) {
+	public static void main(String args[]) {
 		Aplicacion app = new Aplicacion();
+		app.menuGeneral();
 		
 	}
 	//TODO estadisticas cuando ya tengamos mas

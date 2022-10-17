@@ -15,7 +15,7 @@ public class Equipo {
 			nuevoJugador = new Delantero(nombre, precio, numero);
 		else if (pos == "mediocampista")
 			nuevoJugador = new Mediocampista(nombre, precio, numero);
-		else if (pos == "defensor")
+		else if (pos == "defensa")
 			nuevoJugador = new Defensa(nombre, precio,numero);
 		else if (pos == "arquero")
 			nuevoJugador = new Arquero(nombre, precio,numero);

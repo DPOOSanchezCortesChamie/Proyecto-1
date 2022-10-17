@@ -19,7 +19,7 @@ public class Fecha {
 	}
 	
 	public void crearPartido(String dia, String hora, Equipo local, Equipo visitante) {
-		Partido partido = new Partido(dia, hora, local, visitante,num);
+		Partido partido = new Partido(dia, hora, local, visitante, num);
 		partidos.add(partido);
 	}
 	

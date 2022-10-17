@@ -21,8 +21,8 @@ public class Participante {
 	}
 	
 	public void venderComprarJugadores(String equipo, Jugador saliente, Jugador entrante) {
-		equipos.get(equipo).agregarJugador(entrante);
-		equipos.get(equipo).eliminarJugador(saliente);
+		equipos.get(equipo).comprarJugador(entrante);
+		equipos.get(equipo).venderJugador(saliente);
 	}
 	
 	public boolean isUser(String nombre,String contrasena) {

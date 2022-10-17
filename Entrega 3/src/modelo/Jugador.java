@@ -38,6 +38,10 @@ public abstract class Jugador {
 		reportes.add(reporte);
 	}
 	
+	public boolean victoria(int fecha) {
+		return reportes.get(fecha-1).getVictoria();
+	}
+	
 	public boolean reportado(int fecha) {
 		if(reportes.size()==fecha)
 			return true;

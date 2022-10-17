@@ -26,8 +26,9 @@ public class Archivo {
             while ((linea = br.readLine()) != null) {
             	String infoJugadores[] = linea.split(",");
             	int cantidadJugadores = infoJugadores.length/4;
+            	datos.put(equipos[c], new ArrayList<String[]>());
             	for(int i = 0; i<cantidadJugadores;i++) {
-            		String jugador[] = {infoJugadores[i*4],infoJugadores[i*4+1],infoJugadores[i*4+2]};
+            		String jugador[] = {infoJugadores[i*4],infoJugadores[i*4+1],infoJugadores[i*4+2],infoJugadores[i*4+3]};
             		datos.get(equipos[c]).add(jugador);
             	}
             	c++;

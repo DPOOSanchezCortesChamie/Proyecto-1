@@ -24,6 +24,9 @@ public class Admin {
 			return true;
 		return false;
 	}
+	public void concluirFecha() {
+		temporada.concluirFecha();
+	}
 	private void actualizarDatosTemporada() {
 		
 	}

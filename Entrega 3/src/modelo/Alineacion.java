@@ -10,9 +10,9 @@ public class Alineacion {
 	private Fecha fecha;
 	//TODO como hacer llegar esta info
 	
-	public Alineacion() {
-		this.jugadores = new ArrayList<Jugador>();
-		actualizarPuntos();
+	public Alineacion(ArrayList<Jugador> jugadores, Fecha fecha) {
+		this.jugadores = jugadores;
+		this.fecha = fecha;
 	}
 	
 	public Jugador getCapitan() {
@@ -40,6 +40,8 @@ public class Alineacion {
 		for(Jugador jugador: jugadores) {
 			total += jugador.calcularPuntos(fecha.getNumFecha());
 		}
+		if(capitan.victoria(fecha.getNumFecha()))
+			total+=5;
 		puntos = total;
 	}
 }
