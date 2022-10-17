@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Admin {
 	
 	TemporadaFantasia temporada;
@@ -14,6 +16,9 @@ public class Admin {
 	}
 	public int getNumFecha() {
 		return this.numFecha;
+	}
+	public List<EquipoFantasia> getMejoresTres() {
+		return temporada.mejoresTresEquipos();
 	}
 	public TemporadaFantasia crearTemporada(String nominas, String partidos, int presupuesto, String nombre) {
 		temporada = new TemporadaFantasia(presupuesto, nombre);

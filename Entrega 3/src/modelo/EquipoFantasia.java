@@ -21,6 +21,9 @@ public class EquipoFantasia {
 		this.alineaciones = new ArrayList<Alineacion>();
 	}
 	
+	public String getNombre() {
+		return this.nombre;
+	}
 	public void comprarJugador(Jugador jugador) {
 		jugadores.add(jugador);
 		monto -= jugador.getPrecio();

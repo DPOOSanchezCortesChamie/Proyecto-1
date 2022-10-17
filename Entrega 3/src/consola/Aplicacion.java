@@ -5,9 +5,11 @@ import modelo.Admin;
 import modelo.Equipo;
 import modelo.Participante;
 import modelo.Jugador;
+import modelo.EquipoFantasia;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Aplicacion {
@@ -56,6 +58,11 @@ public class Aplicacion {
 	}
 	private void adminMostrarInfoTemporada() {
 		System.out.println("Numero de fecha: " + adminActual.getNumFecha());
+		List<EquipoFantasia> mejores3 = adminActual.getMejoresTres();
+		System.out.println("Mejores 3 equipos de fantasia: ");
+		for(EquipoFantasia e:mejores3) {
+			System.out.println(e.getNombre());
+		}
 	}
 	
 	private void menuAdmin() {
@@ -153,7 +160,6 @@ public class Aplicacion {
 					if(!t) {
 						System.out.println("No te alcanza el presupuesto para comprar este jugador");
 						j = null;
-						breath();
 					} else {
 						if(j.darTipo().equals("Arquero") && cPos[0]==2)
 							t=false;
@@ -165,7 +171,6 @@ public class Aplicacion {
 							t=false;
 						if(!t) {
 							System.out.println("No puedes tener mas jugadores de esa posicion");
-							breath();
 							j = null;
 						} else {
 							if(listaJugadores.contains(j))
@@ -182,25 +187,27 @@ public class Aplicacion {
 		return j;
 	}
 	
-	private void breath() {
-		try {
-			  Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			  Thread.currentThread().interrupt();
-			}
+	private EquipoFantasia userSeleccionarEquipoFantasia() {
+		
 	}
 	
 	public void menuUser() {
 		int ans = 999;
+		EquipoFantasia e = null;
 		while(ans != 0) {
+			
 			System.out.println("Menu de opciones JUGADOR");
 			System.out.println("1. Crear un equipo de fantasia");
-			System.out.println("2. Administrar equipo de fantasia");
+			System.out.println("2. Seleccionar equipo de fantasia a usar");
+			System.out.println("3. Iniciar proceso de compra-venta");
+			System.out.println("4. Modificar alineacion de fantasia");
 			System.out.println("0. Cerrar sesion");
 			System.out.println("Seleccione una opcion: ");
 			ans = sc.nextInt();
 			if (ans==1) 
 				userCrearEquipoFantasia();
+			else if (ans==2)
+				e=userSeleccionarEquipoFantasia();
 			else if (ans==0)
 				this.userActual = null;
 		}

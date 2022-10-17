@@ -31,14 +31,15 @@ public class Participante {
 		return false;
 	}
 	
+	public EquipoFantasia getEquipo(String nombre) {
+		return equipos.get(nombre);
+	}
 	public HashMap<String,Jugador> BuscarJugadorPorEquipo(String nombreEquipo) {
 		TemporadaReal temporada = new TemporadaReal();
 		HashMap<String, Equipo> equipos = temporada.getEquipos();
 		Equipo equipo = equipos.get(nombreEquipo);
 		HashMap<String,Jugador> jugadores = equipo.getJugadores();
-		
 		return jugadores;
-
 	}
 
 }
