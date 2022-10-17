@@ -345,13 +345,15 @@ public class Aplicacion {
 		String user = sc.nextLine();
 		System.out.println("Ingrese su contraseña: ");
 		String pswrd = sc.nextLine();
+		boolean e = true;
 		for(Admin a: admins) {
 			if(a.isUser(user, pswrd)) {
 				adminActual = a;
 				menuAdmin();
+				e = false;
 			}
 		}
-		if(adminActual == null) {
+		if(e) {
 			for(Participante a: usuarios) {
 				if(a.isUser(user, pswrd))
 					userActual = a;
