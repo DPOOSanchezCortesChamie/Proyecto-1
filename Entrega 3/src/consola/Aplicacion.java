@@ -41,18 +41,42 @@ public class Aplicacion {
 		}
 		temporadas.put(nombre,adminActual.crearTemporada(nominas,fechas,p,nombre));
 	}
-	//TODO falta reportar resultado
+	
+	private void adminReportarPartido() {
+		System.out.println("Ingrese el nombre del archivo del partido");
+		String reporte = sc.next();
+		boolean sePudo = adminActual.registrarResultadoPartido(reporte);
+		if (sePudo)
+			System.out.println("Partido registrado exitosamente");
+		else
+			System.out.println("El partido ingresado no se encuentra en la fecha");
+	}
+	private void adminConcluirFecha() {
+		adminActual.concluirFecha();
+	}
+	private void adminMostrarInfoTemporada() {
+		System.out.println("Numero de fecha: " + adminActual.getNumFecha());
+	}
+	
 	private void menuAdmin() {
 		int ans = 999;
 		while(ans != 0) {
 			System.out.println("Menu de opciones ADMINISTRADOR");
 			System.out.println("1. Crear nueva temporada");
 			System.out.println("2. Reportar resultado de un partido");
+			System.out.println("3. Pasar a la siguiente fecha");
+			System.out.println("4. Mostrar informacion temporada");
 			System.out.println("0. Cerrar sesion");
 			System.out.println("Seleccione una opcion: ");
 			ans = sc.nextInt();
 			if (ans == 1)
 				adminCrearTemporada();
+			else if (ans == 2)
+				adminReportarPartido();
+			else if(ans == 3)
+				adminConcluirFecha();
+			else if (ans == 4)
+				adminMostrarInfoTemporada();
 			else if (ans == 0) {
 				this.adminActual = null;
 		}
@@ -112,45 +136,58 @@ public class Aplicacion {
 			HashMap<String, Jugador> jugadores = e.getJugadores();
 			System.out.println("Los jugadores de " + e.getNombre()+ " son: ");
 			for(String jugador: jugadores.keySet()) {
-				System.out.println(jugadores.get(jugador).toString());
+				String temp = jugadores.get(jugador).print();
+				System.out.println(temp);
 			}
 			System.out.println("Escriba el nombre del jugador que desea incluir en su equipo");
 			System.out.println("Si desea volver a ver los equipos digite '0'");
-			String jName = sc.next();
+			String jName = sc.nextLine();
 			if(jName.equals("0"))
 				e = null;
 			else {
 				j = jugadores.get(jName);
 				boolean t = true;
-				if(monto<j.getPrecio())
-					t=false;
-				if(!t) {
-					System.out.println("No te alcanza el presupuesto para comprar este jugador");
-					j = null;
-				} else {
-					if(j.darTipo().equals("Arquero") && cPos[0]==2)
-						t=false;
-					else if (j.darTipo().equals("Defensa") && cPos[1]==5)
-						t=false;
-					else if (j.darTipo().equals("Mediocampista") && cPos[2]==5)
-						t=false;
-					else if (cPos[3]==3)
+				if(j != null) {
+					if(monto<j.getPrecio())
 						t=false;
 					if(!t) {
-						System.out.println("No puedes tener mas jugadores de esa posicion");
+						System.out.println("No te alcanza el presupuesto para comprar este jugador");
 						j = null;
+						breath();
 					} else {
-						if(listaJugadores.contains(j))
-							t = false;
+						if(j.darTipo().equals("Arquero") && cPos[0]==2)
+							t=false;
+						else if (j.darTipo().equals("Defensa") && cPos[1]==5)
+							t=false;
+						else if (j.darTipo().equals("Mediocampista") && cPos[2]==5)
+							t=false;
+						else if (cPos[3]==3)
+							t=false;
 						if(!t) {
-							System.out.println("El jugador elegido ya se encuentra en el equipo");
+							System.out.println("No puedes tener mas jugadores de esa posicion");
+							breath();
 							j = null;
+						} else {
+							if(listaJugadores.contains(j))
+								t = false;
+							if(!t) {
+								System.out.println("El jugador elegido ya se encuentra en el equipo");
+								j = null;
+							}
 						}
 					}
-				}
+				} 
 			}
 		}
 		return j;
+	}
+	
+	private void breath() {
+		try {
+			  Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			  Thread.currentThread().interrupt();
+			}
 	}
 	
 	public void menuUser() {

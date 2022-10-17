@@ -23,11 +23,12 @@ public abstract class Jugador {
 	public int getNumero() {
 		return this.numero;
 	}
-	@Override
-	public String toString() {
+		
+	public String print() {
 		return darTipo() + " - " + this.nombre + " " + numero + " / $" + precio;
 	}
-	public boolean equals(Jugador j) {
+	
+	public boolean isEquals(Jugador j) {
 		if((j.getNombre().equals(this.nombre)&&j.getPrecio()==this.precio&&j.getNumero()==this.numero)
 				|| j == null)
 			return true;

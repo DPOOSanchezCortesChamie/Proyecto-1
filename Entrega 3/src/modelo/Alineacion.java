@@ -26,6 +26,9 @@ public class Alineacion {
 	public void quitarJugador(Jugador jugador) {
 		this.jugadores.remove(jugador);
 	}
+	public int getPuntos() {
+		return this.puntos;
+	}
 	
 	public void meterJugador(Jugador jugador) {
 		this.jugadores.add(jugador);

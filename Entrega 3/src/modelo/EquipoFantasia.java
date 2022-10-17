@@ -20,12 +20,16 @@ public class EquipoFantasia {
 		this.jugadores = new ArrayList<Jugador>();
 		this.alineaciones = new ArrayList<Alineacion>();
 	}
+	
 	public void comprarJugador(Jugador jugador) {
 		jugadores.add(jugador);
 		monto -= jugador.getPrecio();
 	}
 	public int getPuntos() {
 		return this.puntos;
+	}
+	public void actualizarPuntos() {
+		proxima.actualizarPuntos();
 	}
 	public void venderJugador(Jugador jugador) {
 		jugadores.remove(jugador);
@@ -34,6 +38,7 @@ public class EquipoFantasia {
 	}
 	public void concluirFecha() {
 		alineaciones.add(proxima);
+		this.puntos+=proxima.getPuntos();
 	}
 	public void designarAlienacion(ArrayList<Jugador> jugadores) {
 		this.proxima = new Alineacion(jugadores, temporada.getFechaSiguiente());

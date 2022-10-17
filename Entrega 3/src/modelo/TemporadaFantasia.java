@@ -32,8 +32,11 @@ public class TemporadaFantasia {
 		this.temporada.crearEquipos(nominas);
 		this.fechaSiguiente = temporada.crearFechas(partidos);
 	}
-	public void hacerReportePartido(String resultado) {
-		fechaActual.hacerReportePartido(resultado);
+	public boolean hacerReportePartido(String resultado) {
+		if (fechaActual==null)
+			return false;
+		else
+			return fechaActual.hacerReportePartido(resultado);
 	}
 	public HashMap<String, Equipo> getEquiposReales() {
 		return temporada.getEquipos();
@@ -50,14 +53,20 @@ public class TemporadaFantasia {
 			e.concluirFecha();
 		}
 	}
-	public List<EquipoFantasia> MejoresTresEquipos(){
+	public List<EquipoFantasia> mejoresTresEquipos(){
 		ArrayList<EquipoFantasia> equipos = this.equipos;
-		Collections.sort(equipos, new CompararEquipos());
-		List<EquipoFantasia> mejores3 = equipos.subList(0,3);
-		return mejores3;
+		if(equipos.size()>=3) {
+			Collections.sort(equipos, new CompararEquipos());
+			List<EquipoFantasia> mejores3 = equipos.subList(0,3);
+			return mejores3;
+		} else {
+			return equipos;
+		}
 	}
 	
 	public void actualizarDatos() {
-		
+		for(EquipoFantasia e: equipos) {
+			e.actualizarPuntos();
+		}
 	}
 }

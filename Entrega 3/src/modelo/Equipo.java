@@ -8,16 +8,17 @@ public class Equipo {
 	
 	public Equipo(String nombre) {
 		this.nombre = nombre;
+		this.jugadores = new HashMap<String,Jugador>();
 	}
 	public void agregarJugador(String nombre, int precio, String pos, int numero) {
 		Jugador nuevoJugador = null;
-		if (pos == "delantero")
+		if (pos.equals("delantero"))
 			nuevoJugador = new Delantero(nombre, precio, numero);
-		else if (pos == "mediocampista")
+		else if (pos.equals("mediocampista"))
 			nuevoJugador = new Mediocampista(nombre, precio, numero);
-		else if (pos == "defensa")
+		else if (pos.equals("defensa"))
 			nuevoJugador = new Defensa(nombre, precio,numero);
-		else if (pos == "arquero")
+		else if (pos.equals("arquero"))
 			nuevoJugador = new Arquero(nombre, precio,numero);
 		try {
 			jugadores.put(nombre, nuevoJugador);

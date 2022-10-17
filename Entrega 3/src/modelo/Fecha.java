@@ -12,6 +12,7 @@ public class Fecha {
 	
 	public Fecha(int num) {
 		this.num = num;
+		this.partidos = new ArrayList<Partido>();
 	}
 	
 	public int getNumFecha() {
@@ -27,7 +28,7 @@ public class Fecha {
 	 * Busca el partido del archivo y llama a la funcion que elabora los reportes
 	 * @return
 	 */
-	public void hacerReportePartido(String resultados){
+	public boolean hacerReportePartido(String resultados){
 		Archivo archivo = new Archivo();
 		ArrayList<String[]> reportes = archivo.cargarReportes(resultados);
 		String nombreLocal = reportes.get(0)[0];
@@ -41,5 +42,8 @@ public class Fecha {
 		}
 		if(reportable != null)
 			reportable.reportarPartido(reportes);
+		else
+			return false;
+		return true;
 	}
 }
